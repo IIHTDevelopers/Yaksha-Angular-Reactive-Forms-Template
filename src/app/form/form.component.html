@@ -1,0 +1,42 @@
+<h2>User Registration Form</h2>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" formControlName="name">
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+            <div *ngIf="name?.errors?.['required']">Name is required</div>
+            <div *ngIf="name?.errors?.['minlength']">Name should be at least 3 characters</div>
+        </div>
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email">
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+            <div *ngIf="email?.errors?.['required']">Email is required</div>
+            <div *ngIf="email?.errors?.['email']">Invalid email format</div>
+        </div>
+    </div>
+
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" formControlName="password">
+        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+            <div *ngIf="password?.errors?.['required']">Password is required</div>
+            <div *ngIf="password?.errors?.['minlength']">Password should be at least 6 characters</div>
+        </div>
+    </div>
+
+    <div>
+        <button type="submit" [disabled]="userForm.invalid">Submit</button>
+    </div>
+</form>
+
+<!-- Display the submitted user data -->
+<div *ngIf="submittedUser">
+    <h3>Submitted User Data:</h3>
+    <p><strong>Name:</strong> {{ submittedUser.name }}</p>
+    <p><strong>Email:</strong> {{ submittedUser.email }}</p>
+    <p><strong>Password:</strong> {{ submittedUser.password }}</p>
+</div>
